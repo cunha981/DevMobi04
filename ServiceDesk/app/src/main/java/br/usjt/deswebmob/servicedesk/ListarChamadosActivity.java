@@ -9,10 +9,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class ListarChamadosActivity extends Activity {
     public static final String DESCRICAO = "br.usjt.deswebmob.servicedesk.descricao";
-    ArrayList<String> lista;
+    ArrayList<Chamado> lista;
     Activity atividade;
 
     @Override
@@ -23,8 +24,9 @@ public class ListarChamadosActivity extends Activity {
         Intent intent = getIntent();
         String chave = intent.getStringExtra(MainActivity.NOME);
         lista = buscaChamados(chave);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, lista);
+        /*ArrayAdapter<Chamado> adapter = new ArrayAdapter<Chamado>(this,
+                android.R.layout.simple_list_item_1, lista);*/
+        ChamadoAdapter<Chamado> adapter = new ChamadoAdapter<>(this, lista);
         ListView listView = findViewById(R.id.lista_chamados);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new
@@ -41,26 +43,32 @@ public class ListarChamadosActivity extends Activity {
                                                 });
     }
 
-    public ArrayList<String> buscaChamados(String chave) {
-        ArrayList<String> lista = geraListaChamados();
+    public ArrayList<Chamado> buscaChamados(String chave) {
+        ArrayList<Chamado> lista = geraListaChamados();
         if (chave == null || chave.length() == 0) {
             return lista;
         } else {
-            ArrayList<String> subLista = new ArrayList<>();
-            for (String nome : lista) {
-                if (nome.toUpperCase().contains(chave.toUpperCase())) {
-                    subLista.add(nome);
+            ArrayList<Chamado> subLista = new ArrayList<>();
+            for (Chamado chamado : lista) {
+                if (chamado.getDescricao().toUpperCase().contains(chave.toUpperCase())) {
+                    subLista.add(chamado);
                 }
             }
             return subLista;
         }
     }
 
-    public ArrayList<String> geraListaChamados() {
-        ArrayList<String> lista = new ArrayList<>();
-        lista.add("Desktops: Computador da secretária quebrado.");
-        lista.add("Telefonia: Telefone não funciona.");
-        lista.add("Redes: Manutenção no proxy.");
+    public ArrayList<Chamado> geraListaChamados() {
+        ArrayList<Chamado> lista = new ArrayList<>();
+        Chamado c1 = new Chamado(1, new Date(), null, "aberto",
+                "Desktops: Computador da secretária quebrado.",
+                new Fila(FilaId.DESKTOP.id, FilaId.DESKTOP.icone, FilaId.DESKTOP.descricao));
+        lista.add(c1);
+        Chamado c2 = new Chamado(2, new Date(), new Date(), "fechado",
+                "Telefonia: Telefone não funciona.",
+                new Fila(FilaId.TELEFONIA.id, FilaId.TELEFONIA.icone, FilaId.TELEFONIA.descricao));
+        lista.add(c2);
+        /*lista.add("Redes: Manutenção no proxy.");
         lista.add("Servidores: Lentidão generalizada.");
         lista.add("Novos Projetos: CRM");
         lista.add("Manutenção Sistema ERP: atualizar versão.");
@@ -78,7 +86,7 @@ public class ListarChamadosActivity extends Activity {
         lista.add("Telefonia: liberar celular");
         lista.add("Telefonia: mover ramal");
         lista.add("Redes: ponto com defeito");
-        lista.add("Novos Projetos: ferramenta EMM");
+        lista.add("Novos Projetos: ferramenta EMM");*/
         return lista;
     }
 }
