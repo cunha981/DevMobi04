@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class ListaPaisesActivity extends Activity {
     public static final String PAIS = "br.usjt.desmob.atlas.pais";
     Activity atividade;
-    ArrayList<Pais> paises;
+    Pais[] paises;
     ArrayList<String> nomes;
 
     /**
@@ -35,9 +35,8 @@ public class ListaPaisesActivity extends Activity {
         paises = Data.listarPaises(continente);
         nomes = Data.listarNomes(paises);
 
-        ListView listView = findViewById(R.id.lista_paises);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, nomes);
+        ListView listView = (ListView) findViewById(R.id.lista_paises);
+        PaisAdapter adapter = new PaisAdapter(paises, this);
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -46,8 +45,9 @@ public class ListaPaisesActivity extends Activity {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
 
+                // manda para a tela de detalhe
                 Intent intent = new Intent(atividade, DetalhePaisActivity.class);
-                intent.putExtra(PAIS, paises.get(position));
+                intent.putExtra(PAIS, paises[position]);
 
                 startActivity(intent);
 
