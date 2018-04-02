@@ -50,9 +50,9 @@ public class PaisAdapter extends BaseAdapter {
             LayoutInflater inflater = (LayoutInflater)
                     activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.linha_pais, parent, false);
-            ImageView bandeira = (ImageView) view.findViewById(R.id.foto_pais);
-            TextView nome = (TextView) view.findViewById(R.id.texto_nome_pais);
-            TextView detalhe = (TextView) view.findViewById(R.id.texto_detalhe_pais);
+            ImageView bandeira = view.findViewById(R.id.foto_pais);
+            TextView nome =  view.findViewById(R.id.texto_nome_pais);
+            TextView detalhe = view.findViewById(R.id.texto_detalhe_pais);
             ViewHolder viewHolder = new ViewHolder(bandeira, nome, detalhe);
             view.setTag(viewHolder);
         }
@@ -64,7 +64,7 @@ public class PaisAdapter extends BaseAdapter {
                 paises[position].getCapital()));
         Drawable drawable = Util.getDrawable(activity, paises[position].getCodigo3().toLowerCase());
         if(drawable == null){
-            drawable = activity.getDrawable(bandeira);
+            drawable = Util.getDrawable(activity, "bandeira");
         }
         System.out.println(paises[position].getNome());
         viewHolder.getBandeira().setImageDrawable(drawable);

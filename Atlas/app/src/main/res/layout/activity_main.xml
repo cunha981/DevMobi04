@@ -4,22 +4,43 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="br.usjt.desmob.atlas.MainActivity">
+    tools:context="br.usjt.desmob.atlas.MainActivity"
+    android:orientation="horizontal">
 
-    <TextView
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lblContinente"/>
+        <Spinner
+            android:id="@+id/spinnerContinente"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:entries="@array/continentes"
+            android:layout_weight="1"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_busca"
+            android:onClick="listarPaises"/>
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/lblContinente"/>
-    <Spinner
-        android:id="@+id/spinnerContinente"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:entries="@array/continentes"
-        android:layout_weight="1"/>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/btn_busca"
-        android:onClick="listarPaises"/>
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal">
 
+        <ProgressBar
+            android:id="@+id/timer"
+            style="@android:style/Widget.ProgressBar.Large.Inverse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="100dp" />
+    </LinearLayout>
 </LinearLayout>
+
