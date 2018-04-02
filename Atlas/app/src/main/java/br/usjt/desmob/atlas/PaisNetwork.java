@@ -56,7 +56,6 @@ public class PaisNetwork {
                 pais.setNome(item.getString("name"));
                 pais.setRegiao(item.getString("region"));
                 pais.setCodigo3(item.getString("alpha3Code"));
-                //completar os campos em casa
                 paises.add(pais);
             }
         } catch (JSONException e) {
