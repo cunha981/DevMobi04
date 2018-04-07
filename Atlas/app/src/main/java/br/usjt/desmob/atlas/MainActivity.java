@@ -2,6 +2,7 @@ package br.usjt.desmob.atlas;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -57,6 +58,8 @@ public class MainActivity extends Activity {
                         public void run() {
                             try {
                                 paises = PaisNetwork.buscarPaises(URL, continente);
+                                PaisDB db = new PaisDB(MainActivity.this);
+                                db.inserirPaises(paises);
                                 runOnUiThread(new Runnable() {
                                                   @Override
                                                   public void run() {
@@ -73,6 +76,7 @@ public class MainActivity extends Activity {
                     }).start();
         } else {
             Toast.makeText(this, "Rede inativa.", Toast.LENGTH_SHORT).show();
+            new CarregaPaisesDB().execute("pais");
         }
     }
 
@@ -100,6 +104,20 @@ public class MainActivity extends Activity {
         @Override
         public void onNothingSelected(AdapterView<?> parent) {
 
+        }
+    }
+    private class CarregaPaisesDB extends AsyncTask<String, Void, Pais[]> {
+
+        @Override
+        protected Pais[] doInBackground(String... params) {
+            PaisDB db = new PaisDB(MainActivity.this);
+            Pais[] paises = db.listarPaises();
+            return paises;
+        }
+
+        public void onPostExecute(Pais[] paises){
+            intent.putExtra(PAISES, paises);
+            startActivity(intent);
         }
     }
 }
