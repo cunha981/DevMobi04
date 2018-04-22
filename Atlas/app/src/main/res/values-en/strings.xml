@@ -3,4 +3,13 @@
     <string name="app_name">World</string>
     <string name="lblContinente">"Continent: "</string>
     <string name="btn_busca">"List: "</string>
+    <string name="lbl_capital">Capital:</string>
+    <string name="lbl_regiao">Região:</string>
+    <string name="lbl_subregiao">Subregião:</string>
+    <string name="lbl_demonimo">Demônimo:</string>
+    <string name="lbl_area">Área:</string>
+    <string name="lbl_populacao">População:</string>
+    <string name="lbl_gini">Gini:</string>
+    <string name="lbl_latitude">Latitude:</string>
+    <string name="lbl_longitude">Longitude:</string>
 </resources>

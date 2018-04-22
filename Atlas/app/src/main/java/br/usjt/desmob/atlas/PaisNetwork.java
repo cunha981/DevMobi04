@@ -56,6 +56,31 @@ public class PaisNetwork {
                 pais.setNome(item.getString("name"));
                 pais.setRegiao(item.getString("region"));
                 pais.setCodigo3(item.getString("alpha3Code"));
+                try {
+                    pais.setGini(item.getDouble("gini"));
+                } catch (Exception e) {
+                    pais.setGini(0.0);
+                }
+                try {
+                    pais.setPopulacao(item.getInt("population"));
+                } catch (Exception e) {
+                    pais.setPopulacao(0);
+                }
+                pais.setDemonimo(item.getString("demonym"));
+                pais.setSubRegiao(item.getString("subregion"));
+
+                JSONArray latlng = item.getJSONArray("latlng");
+
+                try {
+                    pais.setLatitude(latlng.getDouble(0));
+                } catch (Exception e) {
+                    pais.setLatitude(0);
+                }
+                try {
+                    pais.setLongitude(latlng.getDouble(1));
+                } catch (Exception e) {
+                    pais.setLongitude(0);
+                }
                 paises.add(pais);
             }
         } catch (JSONException e) {
