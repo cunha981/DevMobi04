@@ -22,4 +22,5 @@
     <string name="lbl_gini">Gini:</string>
     <string name="lbl_latitude">Latitude:</string>
     <string name="lbl_longitude">Longitude:</string>
+    <string name="msg_rede">"Rede inativa. Usando armazenamento local."</string>
 </resources>

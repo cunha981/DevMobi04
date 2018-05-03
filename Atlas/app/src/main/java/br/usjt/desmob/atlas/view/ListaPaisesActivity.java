@@ -1,30 +1,21 @@
-package br.usjt.desmob.atlas;
+package br.usjt.desmob.atlas.view;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import java.util.ArrayList;
-/**
- * @author RA 81617543 Igor Almeida
- * DEVMOBI
- * CCP3AN-MCA
- */
+import br.usjt.desmob.atlas.R;
+import br.usjt.desmob.atlas.model.entity.Pais;
+
 public class ListaPaisesActivity extends Activity {
-    public static final String PAIS = "br.usjt.desmob.atlas.pais";
+    public static final String PAIS = "br.usjt.desmob.geodata.pais";
     Activity atividade;
     Pais[] paises;
-    ArrayList<String> nomes;
 
-    /**
-     * @author RA 81617543 Igor Almeida
-     * apresentar lista dos paises do continente selecionado
-     * @param savedInstanceState dados recebidos de outra activity
-     */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

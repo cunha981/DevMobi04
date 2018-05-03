@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="br.usjt.desmob.atlas.DetalhePaisActivity">
+    tools:context="br.usjt.desmob.atlas.view.DetalhePaisActivity">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -31,7 +31,7 @@
 
     <fragment
         android:id="@+id/detalhe_pais_fragment"
-        class="br.usjt.desmob.atlas.DetalhePaisFragment"
+        class="br.usjt.desmob.atlas.view.DetalhePaisFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:layout="@layout/fragment_detalhe_pais" />

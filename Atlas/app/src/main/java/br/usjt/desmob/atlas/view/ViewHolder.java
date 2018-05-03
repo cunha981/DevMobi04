@@ -1,13 +1,12 @@
-package br.usjt.desmob.atlas;
+package br.usjt.desmob.atlas.view;
 
 import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
- * @author RA 81617543 Igor Almeida
- * DEVMOBI
- * CCP3AN-MCA
+ * Created by Igor Almeida | RA 81617543 | CCP3AN-MCA
  */
+
 public class ViewHolder {
     ImageView bandeira;
     TextView nome, detalhe;

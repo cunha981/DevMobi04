@@ -1,7 +1,4 @@
-package br.usjt.desmob.atlas;
-
-import android.content.Context;
-import android.net.ConnectivityManager;
+package br.usjt.desmob.atlas.model.dao;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -10,31 +7,34 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import br.usjt.desmob.atlas.Contexto;
+import br.usjt.desmob.atlas.model.entity.Pais;
+import br.usjt.desmob.atlas.model.entity.Regiao;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
 /**
- * @author RA 81617543 Igor Almeida
- * DEVMOBI
- * CCP3AN-MCA
+ * Created by Igor Almeida | RA 81617543 | CCP3AN-MCA
  */
 
-public class PaisNetwork {
+public class PaisDAORest implements PaisDAO {
 
-    /**
-     * @author RA 81617543 Igor Almeida
-     * Retorna uma lista dos paises do continente
-     * @param url API
-     * @param regiao
-     * @return Pais[]
-     */
-    public static Pais[] buscarPaises(String url, String regiao) throws IOException {
+    public static final String URL = "https://restcountries.eu/rest/v2/";
+
+    @Override
+    public Pais[] buscarPaises(Regiao regiao) throws IOException {
         OkHttpClient client = new OkHttpClient();
         ArrayList<Pais> paises = new ArrayList<>();
+        String url;
+        if(regiao == Regiao.all) {
+            url = URL + regiao;
+        }else{
+            url = URL + "region/" + regiao;
+        }
 
         Request request = new Request.Builder()
-                .url(url+regiao)
+                .url(url)
                 .build();
 
         Response response = client.newCall(request).execute();
@@ -81,25 +81,19 @@ public class PaisNetwork {
                 } catch (Exception e) {
                     pais.setLongitude(0);
                 }
+
+
+                //completar os campos em casa
                 paises.add(pais);
             }
         } catch (JSONException e) {
             e.printStackTrace();
             throw new IOException(e);
         }
+        //salva os paises no cache (banco de dados)
+        PaisDAODb db = new PaisDAODb(Contexto.getValue());
+        db.salvarPaises(regiao, paises);
 
         return paises.toArray(new Pais[0]);
-    }
-
-    /**
-     * Verifica se tem internet
-     * @param context
-     * @return boolean
-     */
-    public static boolean isConnected(Context context){
-        ConnectivityManager connectivityManager = (ConnectivityManager)
-                context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        return connectivityManager.getActiveNetworkInfo() != null &&
-                connectivityManager.getActiveNetworkInfo().isConnected();
     }
 }

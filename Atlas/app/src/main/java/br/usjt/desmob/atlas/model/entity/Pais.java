@@ -1,13 +1,13 @@
-package br.usjt.desmob.atlas;
+package br.usjt.desmob.atlas.model.entity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.text.Collator;
+
 /**
- * @author RA 81617543 Igor Almeida
- * DEVMOBI
- * CCP3AN-MCA
+ * Created by Igor Almeida | RA 81617543 | CCP3AN-MCA
  */
+
 public class Pais implements Serializable, Comparable {
     private String nome;
     private String codigo3;
